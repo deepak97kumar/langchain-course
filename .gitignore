@@ -1,0 +1,32 @@
+# Bytecode & C extensions
+__pycache__/
+*.py[cod]
+*.so
+
+# Distribution & Packaging
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Testing & Coverage
+.tox/
+.coverage
+.pytest_cache/
+
+# Frameworks & Documentation
+db.sqlite3
+docs/_build/
+.ipynb_checkpoints
+
+# Environments
+.env
+.venv
+env/
+venv/
+
+# IDEs & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
