@@ -4,8 +4,12 @@ from langchain_openai import ChatOpenAI
 from langchain_ollama import ChatOllama
 import os
 
-load_dotenv()
+from phoenix.otel import register
+from openinference.instrumentation.langchain import LangChainInstrumentor
 
+register(project_name=os.environ.get("PHOENIX_PROJECT_NAME"), auto_instrument=True)
+
+load_dotenv()
 
 def main():
     print("Hello from langchain-course!")
@@ -28,8 +32,8 @@ Under Modi's tenure, India has experienced democratic backsliding, or the weaken
     """
     summary_prompt_template = PromptTemplate(input_variables=["information"], template=summary_template)
     
-    openAI_llm = ChatOpenAI(temperature=None, model="gpt-6-luna")
-    ollama_llm = ChatOllama(temperature=0, model=os.environ.get("OLLAMA_MODEL"), base_url=os.environ.get("OLLAMA_BASE_URL"))
+    # openAI_llm = ChatOpenAI(temperature=None, model="gpt-6-luna")
+    ollama_llm = ChatOllama(temperature=0, model=os.environ.get("OLLAMA_MODEL", "llama2"), base_url=os.environ.get("OLLAMA_BASE_URL"))
     chain = summary_prompt_template | ollama_llm
 
     response = chain.invoke({"information": information})
