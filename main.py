@@ -1,15 +1,15 @@
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
 from langchain_ollama import ChatOllama
+from phoenix.otel import register
 import os
 
-from phoenix.otel import register
-from openinference.instrumentation.langchain import LangChainInstrumentor
-
-register(project_name=os.environ.get("PHOENIX_PROJECT_NAME"), auto_instrument=True)
-
 load_dotenv()
+
+tracer_provider = register(
+    project_name=os.environ.get("PHOENIX_PROJECT_NAME"),
+    auto_instrument=True
+)
 
 def main():
     print("Hello from langchain-course!")
